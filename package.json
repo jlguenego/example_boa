@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jlguenego/example_boa/issues"
   },
-  "homepage": "https://github.com/jlguenego/example_boa#readme"
+  "homepage": "https://github.com/jlguenego/example_boa#readme",
+  "dependencies": {
+    "github-api": "^3.0.0"
+  }
 }
