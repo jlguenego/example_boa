@@ -1,8 +1,12 @@
-import GitHub from 'github-api';
+import GitHub = require('github-api');
+
+console.log('start');
 
 const gh = new GitHub({
     token: 'bd45521a2809ff942faeb3b9efab9411225f75ea'
 });
+
+console.log('gh', gh);
 
 const jlguenego = gh.getUser('jlguenego');
 (async () => {

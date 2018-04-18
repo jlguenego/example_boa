@@ -1,5 +1,6 @@
 declare module 'github-api' {
-    export default class GitHub {
+    export = GitHub;
+    class GitHub {
         constructor(options: GitHubOptions);
 
         getUser(user: string): GitHubUser;
@@ -7,7 +8,7 @@ declare module 'github-api' {
 
     interface GitHubOptions {
         token: string;
-    } 
+    }
 
     class GitHubUser {
         listStarredRepos(): StarredRepos;
