@@ -4,7 +4,7 @@
         "module": "CommonJS",
         "target": "es5",
         "noImplicitAny": true,
-        "sourceMap": false,
+        "sourceMap": true,
         "lib": [
           "es2015"
         ]

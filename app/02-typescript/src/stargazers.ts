@@ -7,8 +7,11 @@ const gh = new GitHub({
 });
 
 const jlguenego = gh.getUser('jlguenego');
+console.log('jlguenego', jlguenego);
+
 (async () => {
-    const repos = await jlguenego.listStarredRepos();
-    console.log('Here is the list of all the repos I have starred:');
-    repos.data.forEach(r => console.log('name:', r.full_name));
+    const profile = await jlguenego.getProfile();
+    console.log('profile', profile);
+
+    console.log('Full name', profile.data.name);
 })();
