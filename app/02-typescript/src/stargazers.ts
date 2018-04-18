@@ -6,7 +6,7 @@ const gh = new GitHub({
     token: 'bd45521a2809ff942faeb3b9efab9411225f75ea'
 });
 
-console.log('gh', gh);
+console.log('ghx', gh);
 
 const jlguenego = gh.getUser('jlguenego');
 (async () => {
