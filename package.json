@@ -18,6 +18,11 @@
   },
   "homepage": "https://github.com/jlguenego/example_boa#readme",
   "dependencies": {
+    "@types/node": "^9.6.5",
     "github-api": "^3.0.0"
+  },
+  "devDependencies": {
+    "ts-node": "^6.0.0",
+    "typescript": "^2.8.1"
   }
 }
