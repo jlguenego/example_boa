@@ -1,4 +1,4 @@
-import GitHub from 'github-api';
+import GitHub = require('github-api');
 
 console.log('start');
 

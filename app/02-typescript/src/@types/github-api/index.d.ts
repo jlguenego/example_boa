@@ -1,5 +1,5 @@
 declare module 'github-api' {
-    export default GitHub;
+    export = GitHub;
     class GitHub {
         constructor(options: GitHubOptions);
 
