@@ -25,6 +25,4 @@ const req = https.get(options, function (res) {
             console.error(e.message);
         }
     });
-
 });
-
