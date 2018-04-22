@@ -1,13 +1,46 @@
-var { graphql, buildSchema } = require('graphql');
+const https = require('https');
 
-var schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
+const options = {
+    host: 'api.github.com',
+    port: 443,
+    path: '/graphql',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'User-Agent': 'Node',
+        'Authorization': 'bearer xxxxxxxxxxxxx',
+    },
+    agent: false,
+    method: 'POST',
+};
 
-var root = { hello: () => 'Hello world!' };
-
-graphql(schema, '{ hello }', root).then((response) => {
-  console.log(response);
+const reqBody = JSON.stringify({
+    query: `query {
+        viewer {
+          login
+          name
+        }
+      }`
 });
+
+const req = https.request(options, function (res) {
+    res.setEncoding('utf8');
+    let rawData = '';
+    res.on('data', (chunk) => {
+        console.log('data', chunk);
+        rawData += chunk;
+    });
+    res.on('end', () => {
+        try {
+            const body = JSON.parse(rawData);
+            console.log('Here is the list of all the repos I have starred:');
+            console.log('body', body.data.viewer.name);
+            console.log('exit');
+        } catch (e) {
+            console.error(e.message);
+        }
+    });
+});
+
+req.write(reqBody);
+req.end();
