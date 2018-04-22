@@ -20,7 +20,8 @@
   "dependencies": {
     "@types/express": "^4.11.1",
     "@types/node": "^9.6.5",
-    "github-api": "^3.0.0"
+    "github-api": "^3.0.0",
+    "graphql": "^0.13.2"
   },
   "devDependencies": {
     "ts-node": "^6.0.0",

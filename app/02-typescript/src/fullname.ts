@@ -2,9 +2,7 @@ import GitHub = require('github-api');
 
 console.log('start');
 
-const gh = new GitHub({
-    token: 'bd45521a2809ff942faeb3b9efab9411225f75ea'
-});
+const gh = new GitHub();
 
 const jlguenego = gh.getUser('jlguenego');
 console.log('jlguenego', jlguenego);

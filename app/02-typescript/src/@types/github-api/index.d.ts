@@ -1,7 +1,7 @@
 declare module 'github-api' {
     export = GitHub;
     class GitHub {
-        constructor(options: GitHubOptions);
+        constructor(options?: GitHubOptions);
 
         getUser(user: string): Requestable;
     }
