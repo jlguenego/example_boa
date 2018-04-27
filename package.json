@@ -23,7 +23,8 @@
     "express": "^4.16.3",
     "github-api": "^3.0.0",
     "graphql": "^0.13.2",
-    "serve-index": "^1.9.1"
+    "serve-index": "^1.9.1",
+    "soap": "^0.24.0"
   },
   "devDependencies": {
     "ts-node": "^6.0.0",
