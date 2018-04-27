@@ -1,5 +1,7 @@
 const https = require('https');
 
+// Please provide a token for Authorization.
+// Replace the xxxxx by the token with read user access.
 const options = {
     host: 'api.github.com',
     port: 443,
