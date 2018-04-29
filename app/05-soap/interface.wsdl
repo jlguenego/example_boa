@@ -4,8 +4,7 @@
     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
     xmlns:tns="http://tempuri.org/" 
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
-    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" 
+    
      
     >
     <!-- WSDL TYPES: definition of the data types that are used in the web service -->
@@ -45,14 +44,14 @@
     </portType>
     <!-- BINDING: provides details on how a portType operation will actually be transmitted -->
     <binding name="MessageSplitterServiceSoapBinding" type="tns:MessageSplitterSoapPort">
-        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <binding transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="MessageSplitter">
-            <soap:operation soapAction="MessageSplitter" style="document"/>
+            <operation soapAction="MessageSplitter" style="document"/>
             <input>
-                <soap:body use="literal"/>
+                <body use="literal"/>
             </input>
             <output>
-                <soap:body use="literal"/>
+                <body use="literal"/>
             </output>
         </operation>
     </binding>
@@ -71,7 +70,7 @@
     <!-- SERVICE:  -->
     <service name="MessageSplitterService">
         <port name="MessageSplitterServiceSoapPort" binding="tns:MessageSplitterServiceSoapBinding">
-            <soap:address location="http://localhost:8000/wsdl"/>
+            <address location="http://localhost:8000/wsdl"/>
         </port>
         <port name="MessageSplitterServiceSoap12Port" binding="tns:MessageSplitterServiceSoap12Binding">
             <soap12:address location="http://localhost:8000/wsdl"/>
