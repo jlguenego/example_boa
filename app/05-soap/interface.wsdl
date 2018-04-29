@@ -1,6 +1,4 @@
-<definitions  
-    >
-    <!-- WSDL TYPES: definition of the data types that are used in the web service -->
+<definitions   >
     <types>
         <schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
             <element name="MessageSplitterRequest">
@@ -20,14 +18,12 @@
             </element>
         </schema>
     </types>
-    <!-- MESSAGES: defines the data being exchanged between the service and client -->
     <message name="MessageSplitterSoapIn">
         <part name="parameters" element="MessageSplitterRequest"/>
     </message>
     <message name="MessageSplitterSoapOut">
         <part name="parameters" element="MessageSplitterResponse"/>
     </message>
-    <!-- PORT TYPES: defines the complete communication operation (one way/round trip) -->
     <portType name="MessageSplitterSoapPort">
         <!-- The operation name must be the same as the one specified in the service object -->
         <operation name="MessageSplitter">
@@ -35,7 +31,6 @@
             <output message="MessageSplitterSoapOut"/>
         </operation>
     </portType>
-    <!-- BINDING: provides details on how a portType operation will actually be transmitted -->
     <binding name="MessageSplitterServiceSoapBinding" type="MessageSplitterSoapPort">
         <binding transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="MessageSplitter">
@@ -48,24 +43,8 @@
             </output>
         </operation>
     </binding>
-    <binding name="MessageSplitterServiceSoap12Binding" type="MessageSplitterSoapPort">
-        <binding transport="http://schemas.xmlsoap.org/soap/http"/>
-        <operation name="MessageSplitter">
-            <operation soapAction="MessageSplitter" style="document"/>
-            <input>
-                <body use="literal"/>
-            </input>
-            <output>
-                <body use="literal"/>
-            </output>
-        </operation>
-    </binding>
-    <!-- SERVICE:  -->
     <service name="MessageSplitterService">
         <port name="MessageSplitterServiceSoapPort" binding="MessageSplitterServiceSoapBinding">
-            <address location="http://localhost:8000/wsdl"/>
-        </port>
-        <port name="MessageSplitterServiceSoap12Port" binding="MessageSplitterServiceSoap12Binding">
             <address location="http://localhost:8000/wsdl"/>
         </port>
     </service>
