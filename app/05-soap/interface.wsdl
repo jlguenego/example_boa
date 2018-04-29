@@ -1,7 +1,7 @@
 <definitions>
     <types>
         <schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
-            <element name="JLGSplitterRequest">
+            <element name="AddRequest">
                 <complexType>
                     <sequence>
                         <element minOccurs="1" maxOccurs="1" name="a" type="string"/>
@@ -9,14 +9,14 @@
                     </sequence>
                 </complexType>
             </element>
-            <element name="JLGSplitterResponse">
+            <element name="AddResponse">
                 <complexType>
                     <sequence>
                         <element minOccurs="1" maxOccurs="unbounded" name="result" type="string"/>
                     </sequence>
                 </complexType>
             </element>
-            <element name="HelloWorldRequest">
+            <element name="SubstractRequest">
                 <complexType>
                     <sequence>
                         <element minOccurs="1" maxOccurs="1" name="a" type="string"/>
@@ -24,7 +24,7 @@
                     </sequence>
                 </complexType>
             </element>
-            <element name="HelloWorldResponse">
+            <element name="SubstractResponse">
                 <complexType>
                     <sequence>
                         <element minOccurs="1" maxOccurs="unbounded" name="result" type="string"/>
@@ -34,16 +34,16 @@
         </schema>
     </types>
     <message name="JLGSplitterSoapIn">
-        <part name="parameters" element="JLGSplitterRequest"/>
+        <part name="parameters" element="AddRequest"/>
     </message>
     <message name="JLGSplitterSoapOut">
-        <part name="parameters" element="JLGSplitterResponse"/>
+        <part name="parameters" element="AddResponse"/>
     </message>
     <message name="HelloWorldSoapIn">
-        <part name="parameters" element="HelloWorldRequest"/>
+        <part name="parameters" element="SubstractRequest"/>
     </message>
     <message name="HelloWorldSoapOut">
-        <part name="parameters" element="HelloWorldResponse"/>
+        <part name="parameters" element="SubstractResponse"/>
     </message>
     <portType name="JLGSplitterSoapPort">
         <!-- The operation name must be the same as the one specified in the service object -->
