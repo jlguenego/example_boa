@@ -2,7 +2,8 @@
 module.exports = {
     xxService: {
         JLGSplitterServiceSoapPort: {
-            JLGSplitter: splitter_function
+            JLGSplitter: splitter_function,
+            HelloWorld: hello_function
         }
     }
 };
@@ -18,5 +19,14 @@ function splitter_function(args) {
     }
     return {
         result: result
+    }
+}
+
+
+// the splitter function, used by the service
+function hello_function(args) {
+    console.log('hello_function');
+    return {
+        result: ['hello'],
     }
 }
