@@ -1,4 +1,4 @@
-<definitions   >
+<definitions>
     <types>
         <schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
             <element name="JLGSplitterRequest">
