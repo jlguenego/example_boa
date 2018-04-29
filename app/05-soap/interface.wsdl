@@ -47,19 +47,19 @@
     </message>
     <portType name="JLGSplitterSoapPort">
         <!-- The operation name must be the same as the one specified in the service object -->
-        <operation name="JLGSplitter">
+        <operation name="Add">
             <input message="JLGSplitterSoapIn"/>
             <output message="JLGSplitterSoapOut"/>
         </operation>
-        <operation name="HelloWorld">
+        <operation name="Substract">
             <input message="HelloWorldSoapIn"/>
             <output message="HelloWorldSoapOut"/>
         </operation>
     </portType>
     <binding name="JLGSplitterServiceSoapBinding" type="JLGSplitterSoapPort">
         <binding transport="http://schemas.xmlsoap.org/soap/http"/>
-        <operation name="JLGSplitter">
-            <operation soapAction="JLGSplitter" style="document"/>
+        <operation name="Add">
+            <operation soapAction="Add" style="document"/>
             <input>
                 <body use="literal"/>
             </input>
@@ -67,8 +67,8 @@
                 <body use="literal"/>
             </output>
         </operation>
-        <operation name="HelloWorld">
-            <operation soapAction="HelloWorld" style="document"/>
+        <operation name="Substract">
+            <operation soapAction="Substract" style="document"/>
             <input>
                 <body use="literal"/>
             </input>

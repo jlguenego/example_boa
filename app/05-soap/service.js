@@ -2,8 +2,8 @@
 module.exports = {
     CalculatorService: {
         CalculatorPort: {
-            JLGSplitter: splitter_function,
-            HelloWorld: hello_function
+            Add: splitter_function,
+            Substract: hello_function
         }
     }
 };

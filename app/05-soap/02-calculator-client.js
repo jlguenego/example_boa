@@ -15,12 +15,12 @@ soap.createClient(url, function (err, client) {
         splitter: ":"
     };
     // call the service
-    client.HelloWorld(args, function (err, res, rawResponse, soapHeader, rawRequest) {
+    client.Substract(args, function (err, res, rawResponse, soapHeader, rawRequest) {
         if (err)
             throw err;
         // print the service returned result
         console.log(res);
-        client.JLGSplitter(args, function (err, res, rawResponse, soapHeader, rawRequest) {
+        client.Add(args, function (err, res, rawResponse, soapHeader, rawRequest) {
             if (err)
                 throw err;
             // print the service returned result
