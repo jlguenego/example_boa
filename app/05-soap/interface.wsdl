@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions targetNamespace="http://tempuri.org/" 
     xmlns:s="http://www.w3.org/2001/XMLSchema" 
     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
