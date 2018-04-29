@@ -20,16 +20,7 @@ function splitter_function(args) {
 }
 
 // the service
-var serviceObject = {
-	JLGSplitterService: {
-		JLGSplitterServiceSoapPort: {
-			JLGSplitter: splitter_function
-		},
-		JLGSplitterServiceSoap12Port: {
-			JLGSplitter: splitter_function
-		}
-	}
-};
+var serviceObject = require('./service');
 
 // load the WSDL file
 var xml = fs.readFileSync('interface.wsdl', 'utf8');

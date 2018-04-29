@@ -1,8 +1,8 @@
 
 module.exports = {
-    MessageSplitterService: {
-        MessageSplitterServiceSoapPort: {
-            MessageSplitter: splitter_function
+    JLGSplitterService: {
+        JLGSplitterServiceSoapPort: {
+            JLGSplitter: splitter_function
         }
     }
 };
