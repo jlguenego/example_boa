@@ -1,7 +1,7 @@
 
 module.exports = {
-    xxService: {
-        JLGSplitterServiceSoapPort: {
+    CalculatorService: {
+        CalculatorPort: {
             JLGSplitter: splitter_function,
             HelloWorld: hello_function
         }
