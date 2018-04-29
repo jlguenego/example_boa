@@ -2,14 +2,13 @@
 module.exports = {
     CalculatorService: {
         CalculatorPort: {
-            Add: splitter_function,
-            Substract: hello_function
+            Add,
+            Substract
         }
     }
 };
 
-// the splitter function, used by the service
-function splitter_function(args) {
+function Add(args) {
     console.log('splitter_function');
     var splitter = args.splitter;
     var splitted_msg = args.message.split(splitter);
@@ -23,8 +22,7 @@ function splitter_function(args) {
 }
 
 
-// the splitter function, used by the service
-function hello_function(args) {
+function Substract(args) {
     console.log('hello_function');
     return {
         result: ['hello'],
