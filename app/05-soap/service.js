@@ -3,9 +3,6 @@ module.exports = {
     MessageSplitterService: {
         MessageSplitterServiceSoapPort: {
             MessageSplitter: splitter_function
-        },
-        MessageSplitterServiceSoap12Port: {
-            MessageSplitter: splitter_function
         }
     }
 };
