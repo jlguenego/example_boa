@@ -11,8 +11,8 @@ soap.createClient(url, function (err, client) {
     * in the WSDL file
     */
     var args = {
-        message: "id1:12:34:56:out42",
-        splitter: ":"
+        a: "3",
+        b: "5"
     };
     // call the service
     client.Substract(args, function (err, res, rawResponse, soapHeader, rawRequest) {

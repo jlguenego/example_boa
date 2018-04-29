@@ -4,8 +4,8 @@
             <element name="JLGSplitterRequest">
                 <complexType>
                     <sequence>
-                        <element minOccurs="1" maxOccurs="1" name="message" type="string"/>
-                        <element minOccurs="1" maxOccurs="1" name="splitter" type="string"/>
+                        <element minOccurs="1" maxOccurs="1" name="a" type="string"/>
+                        <element minOccurs="1" maxOccurs="1" name="b" type="string"/>
                     </sequence>
                 </complexType>
             </element>
@@ -19,8 +19,8 @@
             <element name="HelloWorldRequest">
                 <complexType>
                     <sequence>
-                        <element minOccurs="1" maxOccurs="1" name="message" type="string"/>
-                        <element minOccurs="1" maxOccurs="1" name="splitter" type="string"/>
+                        <element minOccurs="1" maxOccurs="1" name="a" type="string"/>
+                        <element minOccurs="1" maxOccurs="1" name="b" type="string"/>
                     </sequence>
                 </complexType>
             </element>

@@ -9,22 +9,17 @@ module.exports = {
 };
 
 function Add(args) {
-    console.log('splitter_function');
-    var splitter = args.splitter;
-    var splitted_msg = args.message.split(splitter);
-    var result = [];
-    for (var i = 0; i < splitted_msg.length; i++) {
-        result.push(splitted_msg[i]);
-    }
+    console.log('Add', args);
     return {
-        result: result
+        result: [+args.a + (+args.b)]
     }
 }
 
 
 function Substract(args) {
-    console.log('hello_function');
+    console.log('Substract', args);
+    
     return {
-        result: ['hello'],
+        result: [+args.a - (+args.b)]
     }
 }
