@@ -33,30 +33,30 @@
             </element>
         </schema>
     </types>
-    <message name="JLGSplitterSoapIn">
+    <message name="AddMessageIn">
         <part name="parameters" element="AddRequest"/>
     </message>
-    <message name="JLGSplitterSoapOut">
+    <message name="AddMessageOut">
         <part name="parameters" element="AddResponse"/>
     </message>
-    <message name="HelloWorldSoapIn">
+    <message name="SubstractMessageIn">
         <part name="parameters" element="SubstractRequest"/>
     </message>
-    <message name="HelloWorldSoapOut">
+    <message name="SubstractMessageOut">
         <part name="parameters" element="SubstractResponse"/>
     </message>
-    <portType name="JLGSplitterSoapPort">
+    <portType name="CalculatorPortType">
         <!-- The operation name must be the same as the one specified in the service object -->
         <operation name="Add">
-            <input message="JLGSplitterSoapIn"/>
-            <output message="JLGSplitterSoapOut"/>
+            <input message="AddMessageIn"/>
+            <output message="AddMessageOut"/>
         </operation>
         <operation name="Substract">
-            <input message="HelloWorldSoapIn"/>
-            <output message="HelloWorldSoapOut"/>
+            <input message="SubstractMessageIn"/>
+            <output message="SubstractMessageOut"/>
         </operation>
     </portType>
-    <binding name="JLGSplitterServiceSoapBinding" type="JLGSplitterSoapPort">
+    <binding name="CalculatorBinding" type="CalculatorPortType">
         <binding transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="Add">
             <operation soapAction="Add" style="document"/>
@@ -78,7 +78,7 @@
         </operation>
     </binding>
     <service name="CalculatorService">
-        <port name="CalculatorPort" binding="JLGSplitterServiceSoapBinding">
+        <port name="CalculatorPort" binding="CalculatorBinding">
             <address location="http://localhost:8000/wsdl"/>
         </port>
     </service>
