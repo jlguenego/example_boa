@@ -15,7 +15,7 @@ soap.createClient(url, function (err, client) {
         splitter: ":"
     };
     // call the service
-    client.MessageSplitter(args, function (err, res) {
+    client.JLGSplitter(args, function (err, res) {
         if (err)
             throw err;
         // print the service returned result

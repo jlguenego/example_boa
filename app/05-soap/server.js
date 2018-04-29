@@ -21,12 +21,12 @@ function splitter_function(args) {
 
 // the service
 var serviceObject = {
-	MessageSplitterService: {
-		MessageSplitterServiceSoapPort: {
-			MessageSplitter: splitter_function
+	JLGSplitterService: {
+		JLGSplitterServiceSoapPort: {
+			JLGSplitter: splitter_function
 		},
-		MessageSplitterServiceSoap12Port: {
-			MessageSplitter: splitter_function
+		JLGSplitterServiceSoap12Port: {
+			JLGSplitter: splitter_function
 		}
 	}
 };
