@@ -1,6 +1,6 @@
 
 module.exports = {
-    JLGSplitterService: {
+    xxService: {
         JLGSplitterServiceSoapPort: {
             JLGSplitter: splitter_function
         }

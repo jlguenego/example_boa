@@ -43,7 +43,7 @@
             </output>
         </operation>
     </binding>
-    <service name="JLGSplitterService">
+    <service name="xxService">
         <port name="JLGSplitterServiceSoapPort" binding="JLGSplitterServiceSoapBinding">
             <address location="http://localhost:8000/wsdl"/>
         </port>
