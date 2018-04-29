@@ -1,11 +1,5 @@
 <definitions targetNamespace="http://tempuri.org/" 
     xmlns:s="http://www.w3.org/2001/XMLSchema" 
-    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
-    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
-    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
-    xmlns:tns="http://tempuri.org/" 
-    
-     
     >
     <!-- WSDL TYPES: definition of the data types that are used in the web service -->
     <types>
@@ -29,21 +23,21 @@
     </types>
     <!-- MESSAGES: defines the data being exchanged between the service and client -->
     <message name="MessageSplitterSoapIn">
-        <part name="parameters" element="tns:MessageSplitterRequest"/>
+        <part name="parameters" element="MessageSplitterRequest"/>
     </message>
     <message name="MessageSplitterSoapOut">
-        <part name="parameters" element="tns:MessageSplitterResponse"/>
+        <part name="parameters" element="MessageSplitterResponse"/>
     </message>
     <!-- PORT TYPES: defines the complete communication operation (one way/round trip) -->
     <portType name="MessageSplitterSoapPort">
         <!-- The operation name must be the same as the one specified in the service object -->
         <operation name="MessageSplitter">
-            <input message="tns:MessageSplitterSoapIn"/>
-            <output message="tns:MessageSplitterSoapOut"/>
+            <input message="MessageSplitterSoapIn"/>
+            <output message="MessageSplitterSoapOut"/>
         </operation>
     </portType>
     <!-- BINDING: provides details on how a portType operation will actually be transmitted -->
-    <binding name="MessageSplitterServiceSoapBinding" type="tns:MessageSplitterSoapPort">
+    <binding name="MessageSplitterServiceSoapBinding" type="MessageSplitterSoapPort">
         <binding transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="MessageSplitter">
             <operation soapAction="MessageSplitter" style="document"/>
@@ -55,25 +49,25 @@
             </output>
         </operation>
     </binding>
-    <binding name="MessageSplitterServiceSoap12Binding" type="tns:MessageSplitterSoapPort">
-        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <binding name="MessageSplitterServiceSoap12Binding" type="MessageSplitterSoapPort">
+        <binding transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="MessageSplitter">
-            <soap12:operation soapAction="MessageSplitter" style="document"/>
+            <operation soapAction="MessageSplitter" style="document"/>
             <input>
-                <soap12:body use="literal"/>
+                <body use="literal"/>
             </input>
             <output>
-                <soap12:body use="literal"/>
+                <body use="literal"/>
             </output>
         </operation>
     </binding>
     <!-- SERVICE:  -->
     <service name="MessageSplitterService">
-        <port name="MessageSplitterServiceSoapPort" binding="tns:MessageSplitterServiceSoapBinding">
+        <port name="MessageSplitterServiceSoapPort" binding="MessageSplitterServiceSoapBinding">
             <address location="http://localhost:8000/wsdl"/>
         </port>
-        <port name="MessageSplitterServiceSoap12Port" binding="tns:MessageSplitterServiceSoap12Binding">
-            <soap12:address location="http://localhost:8000/wsdl"/>
+        <port name="MessageSplitterServiceSoap12Port" binding="MessageSplitterServiceSoap12Binding">
+            <address location="http://localhost:8000/wsdl"/>
         </port>
     </service>
 </definitions>
