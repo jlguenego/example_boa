@@ -1,46 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const jsonxml = require('jsontoxml');
-
-function handleArray(js) {
-	if (js instanceof Array) {
-		return js.map(n => ({item: n}));
-	}
-	if (js instanceof Object) {
-		const result = {};
-		for (let p in js) {
-			result[p] = handleArray(js[p]);
-		}
-		return result;
-	}
-	return js;
-}
-
-function manageFormat() {
-	const middleware = (req, res, next) => {
-		const end = res.end;
-		res.end = (chunk, encoding) => {
-			if (req.headers.accept === 'application/xml' || req.headers.accept === 'text/xml') {
-				const json = chunk.toString();
-				const xml = jsonxml(JSON.stringify(handleArray(JSON.parse(json))));
-				chunk = new Buffer(xml);
-				res.set('Content-Type', req.headers.accept);
-				res.set('Content-Length', chunk.byteLength);
-			}
-
-			end.call(res, chunk, encoding);
-		}
-		next();
-	};
-	return middleware;
-}
+const xml = require('./xml');
 
 class Rest {
 	resource(model) {
 		const app = express.Router();
 		app.use(bodyParser.json());
-		app.use(manageFormat());
+		app.use(xml()); // manage the accept xml.
 
 		// create
 		app.post('/', async (req, res, next) => {
