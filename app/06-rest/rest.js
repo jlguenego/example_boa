@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const xml = require('./xml');
+const outputFormat = require('./output-format');
 
 class Rest {
 	resource(model) {
 		const app = express.Router();
 		app.use(bodyParser.json());
-		app.use(xml()); // manage the accept xml.
+		app.use(outputFormat); // manage the accept xml, etc.
 
 		// create
 		app.post('/', async (req, res, next) => {
