@@ -13,7 +13,15 @@ function handleArray(js) {
 	}
 	return js;
 }
-
+/**
+ * Accept JSON or XML
+ * The format is decided according the HTTP Request header 'Accept'
+ * 
+ * @param {any} req 
+ * @param {any} res 
+ * @param {any} next 
+ * @returns 
+ */
 module.exports = function outputFormat(req, res, next) {
 	if (req.headers.accept && ['application/xml', 'text/xml', 'application/json', '*/*'].indexOf(req.headers.accept) === -1) {
 		res.status(406).end();
@@ -24,7 +32,7 @@ module.exports = function outputFormat(req, res, next) {
 		if (req.headers.accept === 'application/xml' || req.headers.accept === 'text/xml') {
 			const json = chunk.toString();
 			const xml = jsonxml(JSON.stringify(handleArray(JSON.parse(json))));
-			chunk = new Buffer(xml);
+			chunk = Buffer.from(xml);
 			res.set('Content-Type', req.headers.accept);
 			res.set('Content-Length', chunk.byteLength);
 		}
