@@ -13,6 +13,7 @@ class Rest {
 		// create
 		app.post('/', async (req, res, next) => {
 			console.log('create req.url', req.url);
+			console.log('create req.body', req.body);
 			try {
 				const m = new model(req.body);
 				await m.save();
@@ -44,7 +45,7 @@ class Rest {
 					res.status(404).json({ error: 'Object not found' });
 					return;
 				}
-				res.json({ content: resource });
+				res.json({ content: hateoas.addLink(req, resource.toObject()) });
 			} catch (e) {
 				res.status(400).json({ error: e.message });
 			}
@@ -64,7 +65,7 @@ class Rest {
 					overwrite: true
 				});
 				resource = await model.findById(id);
-				res.json({ content: resource });
+				res.json({ content: hateoas.addLink(req, resource.toObject()) });
 			} catch (e) {
 				res.status(400).json({ error: e.message });
 			}
@@ -85,7 +86,7 @@ class Rest {
 					overwrite: false
 				});
 				resource = await model.findById(id);
-				res.json({ content: resource });
+				res.json({ content: hateoas.addLink(req, resource.toObject()) });
 			} catch (e) {
 				res.status(400).json({ error: e.message });
 			}

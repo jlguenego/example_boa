@@ -23,13 +23,14 @@ function handleArray(js) {
  * @returns 
  */
 module.exports = function outputFormat(req, res, next) {
-	if (req.headers.accept && ['application/xml', 'text/xml', 'application/json', '*/*'].indexOf(req.headers.accept) === -1) {
+	const accept = req.headers.accept.split(',').map(s => s.trim())[0];
+	if (accept && ['application/xml', 'text/xml', 'application/json', '*/*'].indexOf(accept) === -1) {
 		res.status(406).end();
 		return;
 	}
 	const end = res.end;
 	res.end = (chunk, encoding) => {
-		if (req.headers.accept === 'application/xml' || req.headers.accept === 'text/xml') {
+		if (accept === 'application/xml' || accept === 'text/xml') {
 			const json = chunk.toString();
 			const xml = jsonxml(JSON.stringify(handleArray(JSON.parse(json))));
 			chunk = Buffer.from(xml);

@@ -11,9 +11,10 @@ app.use((req, res, next) => {
 
 const Ticket = mongoose.model('Ticket',
 	new mongoose.Schema({
-		number: { type: String, required: true, unique: true, index: true },
-		category: String,
-		movie: String
+		// number: { type: String, required: true, unique: true, index: true },
+		// category: String,
+		// movie: String
+		name: String
 	}, {
 		strict: false, // allow other field to be saved in MongoDB.
 	}));
@@ -28,7 +29,7 @@ const User = mongoose.model('User',
 
 async function connect() {
 	try {
-		await mongoose.connect('mongodb://localhost/TP5');
+		await mongoose.connect('mongodb://localhost/boa');
 		console.log('connected to MongoDB.');
 	} catch (e) {
 		console.log('error while connecting to MongoDB.', e.message);
