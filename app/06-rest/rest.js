@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const outputFormat = require('./output-format');
+const hateoas = require('./hateoas');
 
 class Rest {
 	resource(model) {
@@ -13,9 +14,9 @@ class Rest {
 		app.post('/', async (req, res, next) => {
 			console.log('create req.url', req.url);
 			try {
-				const object = new model(req.body);
-				await object.save();
-				res.status(201).json({ content: object });
+				const m = new model(req.body);
+				await m.save();
+				res.status(201).json({ content: hateoas.addLink(req, m.toObject()) });
 			} catch (e) {
 				res.status(400).json({ error: e.message });
 			}
@@ -27,7 +28,7 @@ class Rest {
 			console.log('retrieve all req.url', req.url);
 			try {
 				const resources = await model.find({});
-				res.json({ content: resources });
+				res.json({ content: resources.map(r => hateoas.addLink(req, r.toObject())) });
 			} catch (e) {
 				res.status(400).json({ error: e.message });
 			}
