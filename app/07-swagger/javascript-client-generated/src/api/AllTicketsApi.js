@@ -33,20 +33,13 @@ export default class AllTicketsApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the deleteAllTickets operation.
-     * @callback module:api/AllTicketsApi~deleteAllTicketsCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Delete all tickets
      * To be able to delete all tickets. 
-     * @param {module:api/AllTicketsApi~deleteAllTicketsCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    deleteAllTickets(callback) {
+    deleteAllTicketsWithHttpInfo() {
       let postBody = null;
 
 
@@ -67,25 +60,29 @@ export default class AllTicketsApi {
       return this.apiClient.callApi(
         '/tickets', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the retrieveAllTickets operation.
-     * @callback module:api/AllTicketsApi~retrieveAllTicketsCallback
-     * @param {String} error Error message, if any.
-     * @param {Object} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Delete all tickets
+     * To be able to delete all tickets. 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    deleteAllTickets() {
+      return this.deleteAllTicketsWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * List all tickets
      * To be able to retrieve all tickets. 
-     * @param {module:api/AllTicketsApi~retrieveAllTicketsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Object}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Object} and HTTP response
      */
-    retrieveAllTickets(callback) {
+    retrieveAllTicketsWithHttpInfo() {
       let postBody = null;
 
 
@@ -106,8 +103,20 @@ export default class AllTicketsApi {
       return this.apiClient.callApi(
         '/tickets', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
+    }
+
+    /**
+     * List all tickets
+     * To be able to retrieve all tickets. 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Object}
+     */
+    retrieveAllTickets() {
+      return this.retrieveAllTicketsWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

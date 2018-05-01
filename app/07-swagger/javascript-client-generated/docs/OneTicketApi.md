@@ -27,14 +27,12 @@ let apiInstance = new TicketApi.OneTicketApi();
 let opts = { 
   'ticket': new TicketApi.Ticket() // Ticket | a ticket
 };
-
-apiInstance.createTicket(opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.createTicket(opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -72,14 +70,12 @@ let apiInstance = new TicketApi.OneTicketApi();
 
 let id = "id_example"; // String | ticket id
 
-
-apiInstance.deleteTicket(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.deleteTicket(id).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -117,14 +113,12 @@ let apiInstance = new TicketApi.OneTicketApi();
 
 let id = "id_example"; // String | ticket id
 
-
-apiInstance.retrieveTicket(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.retrieveTicket(id).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -165,14 +159,12 @@ let id = "id_example"; // String | ticket id
 let opts = { 
   'ticket': new TicketApi.Ticket() // Ticket | a ticket
 };
-
-apiInstance.updateTicket(id, opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.updateTicket(id, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

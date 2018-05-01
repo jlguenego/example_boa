@@ -71,15 +71,12 @@ Please follow the [installation](#installation) instruction and execute the foll
 var TicketApi = require('ticket_api');
 
 var api = new TicketApi.AllTicketsApi()
+api.deleteAllTickets().then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-};
-api.deleteAllTickets(callback);
 
 ```
 

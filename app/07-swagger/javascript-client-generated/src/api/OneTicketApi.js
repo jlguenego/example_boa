@@ -34,23 +34,15 @@ export default class OneTicketApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the createTicket operation.
-     * @callback module:api/OneTicketApi~createTicketCallback
-     * @param {String} error Error message, if any.
-     * @param {Object} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Create an new ticket
      * Create an new ticket on multinline... 
      * @param {Object} opts Optional parameters
      * @param {module:model/Ticket} opts.ticket a ticket
-     * @param {module:api/OneTicketApi~createTicketCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Object}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Object} and HTTP response
      */
-    createTicket(opts, callback) {
+    createTicketWithHttpInfo(opts) {
       opts = opts || {};
       let postBody = opts['ticket'];
 
@@ -72,26 +64,32 @@ export default class OneTicketApi {
       return this.apiClient.callApi(
         '/tickets', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the deleteTicket operation.
-     * @callback module:api/OneTicketApi~deleteTicketCallback
-     * @param {String} error Error message, if any.
-     * @param {Object} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Create an new ticket
+     * Create an new ticket on multinline... 
+     * @param {Object} opts Optional parameters
+     * @param {module:model/Ticket} opts.ticket a ticket
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Object}
      */
+    createTicket(opts) {
+      return this.createTicketWithHttpInfo(opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Delete an existing ticket.
      * Delete an existing ticket.
      * @param {String} id ticket id
-     * @param {module:api/OneTicketApi~deleteTicketCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Object}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Object} and HTTP response
      */
-    deleteTicket(id, callback) {
+    deleteTicketWithHttpInfo(id) {
       let postBody = null;
 
       // verify the required parameter 'id' is set
@@ -118,26 +116,31 @@ export default class OneTicketApi {
       return this.apiClient.callApi(
         '/tickets/{id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the retrieveTicket operation.
-     * @callback module:api/OneTicketApi~retrieveTicketCallback
-     * @param {String} error Error message, if any.
-     * @param {Object} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Delete an existing ticket.
+     * Delete an existing ticket.
+     * @param {String} id ticket id
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Object}
      */
+    deleteTicket(id) {
+      return this.deleteTicketWithHttpInfo(id)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Retrieve a single ticket
      * Retrieve a ticket
      * @param {String} id ticket id
-     * @param {module:api/OneTicketApi~retrieveTicketCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Object}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Object} and HTTP response
      */
-    retrieveTicket(id, callback) {
+    retrieveTicketWithHttpInfo(id) {
       let postBody = null;
 
       // verify the required parameter 'id' is set
@@ -164,17 +167,23 @@ export default class OneTicketApi {
       return this.apiClient.callApi(
         '/tickets/{id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the updateTicket operation.
-     * @callback module:api/OneTicketApi~updateTicketCallback
-     * @param {String} error Error message, if any.
-     * @param {Object} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Retrieve a single ticket
+     * Retrieve a ticket
+     * @param {String} id ticket id
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Object}
      */
+    retrieveTicket(id) {
+      return this.retrieveTicketWithHttpInfo(id)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Update an new ticket
@@ -182,10 +191,9 @@ export default class OneTicketApi {
      * @param {String} id ticket id
      * @param {Object} opts Optional parameters
      * @param {module:model/Ticket} opts.ticket a ticket
-     * @param {module:api/OneTicketApi~updateTicketCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Object}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Object} and HTTP response
      */
-    updateTicket(id, opts, callback) {
+    updateTicketWithHttpInfo(id, opts) {
       opts = opts || {};
       let postBody = opts['ticket'];
 
@@ -213,8 +221,23 @@ export default class OneTicketApi {
       return this.apiClient.callApi(
         '/tickets/{id}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
+    }
+
+    /**
+     * Update an new ticket
+     * Update a ticket
+     * @param {String} id ticket id
+     * @param {Object} opts Optional parameters
+     * @param {module:model/Ticket} opts.ticket a ticket
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Object}
+     */
+    updateTicket(id, opts) {
+      return this.updateTicketWithHttpInfo(id, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

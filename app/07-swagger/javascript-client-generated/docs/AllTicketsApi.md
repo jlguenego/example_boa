@@ -21,14 +21,12 @@ To be able to delete all tickets.
 import TicketApi from 'ticket_api';
 
 let apiInstance = new TicketApi.AllTicketsApi();
-
-apiInstance.deleteAllTickets((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
+apiInstance.deleteAllTickets().then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -60,14 +58,12 @@ To be able to retrieve all tickets.
 import TicketApi from 'ticket_api';
 
 let apiInstance = new TicketApi.AllTicketsApi();
-
-apiInstance.retrieveAllTickets((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.retrieveAllTickets().then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
