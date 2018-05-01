@@ -4,6 +4,17 @@ const mongoose = require('mongoose');
 const outputFormat = require('./output-format');
 const hateoas = require('./hateoas');
 
+function getId(id) {
+	try {
+		return mongoose.Types.ObjectId(id);
+	} catch (e) {
+		throw {
+			status: 400,
+			message: 'Id not well formatted',
+		}
+	}
+}
+
 class Rest {
 	resource(model) {
 		const app = express.Router();
@@ -19,7 +30,7 @@ class Rest {
 				await m.save();
 				res.status(201).json({ content: hateoas.addLink(req, m.toObject()) });
 			} catch (e) {
-				res.status(400).json({ error: e.message });
+				res.status(e.status || 500).json({ error: e.message });
 			}
 
 		});
@@ -31,7 +42,7 @@ class Rest {
 				const resources = await model.find({});
 				res.json({ content: resources.map(r => hateoas.addLink(req, r.toObject())) });
 			} catch (e) {
-				res.status(400).json({ error: e.message });
+				res.status(e.status || 500).json({ error: e.message });
 			}
 		});
 
@@ -39,7 +50,7 @@ class Rest {
 		app.get('/:id', async (req, res, next) => {
 			console.log('retrieve one req.url', req.url);
 			try {
-				const id = mongoose.Types.ObjectId(req.params.id);
+				const id = getId(req.params.id);
 				const resource = await model.findById(id);
 				if (resource === null) {
 					res.status(404).json({ error: 'Object not found' });
@@ -47,7 +58,7 @@ class Rest {
 				}
 				res.json({ content: hateoas.addLink(req, resource.toObject()) });
 			} catch (e) {
-				res.status(400).json({ error: e.message });
+				res.status(e.status || 500).json({ error: e.message });
 			}
 		});
 
@@ -55,7 +66,7 @@ class Rest {
 		app.put('/:id', async (req, res, next) => {
 			console.log('update put req.url', req.url);
 			try {
-				const id = mongoose.Types.ObjectId(req.params.id);
+				const id = getId(req.params.id);
 				let resource = await model.findById(id);
 				if (resource === null) {
 					res.status(404).json({ error: 'Object not found' });
@@ -67,7 +78,7 @@ class Rest {
 				resource = await model.findById(id);
 				res.json({ content: hateoas.addLink(req, resource.toObject()) });
 			} catch (e) {
-				res.status(400).json({ error: e.message });
+				res.status(e.status || 500).json({ error: e.message });
 			}
 		});
 
@@ -75,7 +86,7 @@ class Rest {
 		app.patch('/:id', async (req, res, next) => {
 			console.log('update put req.url', req.url);
 			try {
-				const id = mongoose.Types.ObjectId(req.params.id);
+				const id = getId(req.params.id);
 				let resource = await model.findById(id);
 				if (resource === null) {
 					res.status(404).json({ error: 'Object not found' });
@@ -88,7 +99,7 @@ class Rest {
 				resource = await model.findById(id);
 				res.json({ content: hateoas.addLink(req, resource.toObject()) });
 			} catch (e) {
-				res.status(400).json({ error: e.message });
+				res.status(e.status || 500).json({ error: e.message });
 			}
 		});
 
@@ -96,7 +107,7 @@ class Rest {
 		app.delete('/:id', async (req, res, next) => {
 			console.log('delete one req.url', req.url);
 			try {
-				const id = mongoose.Types.ObjectId(req.params.id);
+				const id = getId(req.params.id);
 				let resource = await model.findById(id);
 				if (resource === null) {
 					res.status(404).json({ error: 'Object not found' });
@@ -105,7 +116,7 @@ class Rest {
 				await model.deleteOne({ _id: req.params.id });
 				res.json({ content: resource });
 			} catch (e) {
-				res.status(400).json({ error: e.message });
+				res.status(e.status || 500).json({ error: e.message });
 			}
 		});
 
@@ -116,7 +127,7 @@ class Rest {
 				await model.deleteMany({});
 				res.status(204).end();
 			} catch (e) {
-				res.status(400).json({ error: e.message });
+				res.status(e.status || 500).json({ error: e.message });
 			}
 		});
 

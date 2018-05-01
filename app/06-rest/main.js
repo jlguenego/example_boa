@@ -33,7 +33,7 @@ function MyController($http) {
 		console.log('appel retrieve en cours...', id);
 		return $http.get(`${url}/${id}`).then((response) => {
 			console.log('ticket', response.data.content);
-			this.ticket = response.data.content;
+			this.retrievedTicket = response.data.content;
 		}).catch((error) => {
 			console.error('error', error);
 		});
