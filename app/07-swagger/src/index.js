@@ -1,8 +1,10 @@
+import 'angular/angular-csp.css';
+import './style.css';
 import 'angular';
 
 const app = angular.module('myApp', []);
 
-const url = '../../ws/tickets';
+const url = '../../../ws/tickets';
 
 function MyController($http) {
 
