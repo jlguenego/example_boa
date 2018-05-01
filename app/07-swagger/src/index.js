@@ -6,8 +6,7 @@ import { OneTicketApi, AllTicketsApi, ApiClient } from '../javascript-client-gen
 
 const app = angular.module('myApp', []);
 
-const url = '../../../ws/tickets';
-ApiClient.instance.basePath = '../../../ws';
+ApiClient.instance.basePath = 'http://localhost:8080/ws';
 
 const oneTicketApi = new OneTicketApi();
 const allTicketApi = new AllTicketsApi();
