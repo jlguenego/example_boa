@@ -6,7 +6,11 @@ import { OneTicketApi, AllTicketsApi, ApiClient } from '../javascript-client-gen
 
 const app = angular.module('myApp', []);
 
-ApiClient.instance.basePath = 'http://localhost:8080/ws';
+// 8080 : swagger generated server.
+// ApiClient.instance.basePath = 'http://localhost:8080/ws';
+
+// 8000 : the good old server of example 06-rest.
+ApiClient.instance.basePath = 'http://localhost:8000/ws';
 
 const oneTicketApi = new OneTicketApi();
 const allTicketApi = new AllTicketsApi();
