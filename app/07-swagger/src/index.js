@@ -43,18 +43,21 @@ function MyController($scope, $http) {
 
     this.empty = function () {
         console.log('appel delete all en cours...');
-        return $http.delete(url).then(() => {
-            this.query();
-        }).catch((error) => {
-            console.error('error', error);
-        });
+        return allTicketApi.deleteAllTickets()
+            .then(response => {
+                console.log('response', response);
+                this.query();
+            })
+            .catch(e => console.log('error', e));
     };
 
     this.retrieve = function (id) {
         console.log('appel retrieve en cours...', id);
-        return $http.get(`${url}/${id}`).then((response) => {
-            console.log('ticket', response.data.content);
-            this.retrievedTicket = response.data.content;
+        return oneTicketApi.retrieveTicket(id).then(response => {
+            console.log('response', response);
+            this.retrievedTicket = response.content;
+            $scope.$apply();
+            this.query();
         }).catch((error) => {
             console.error('error', error);
         });
@@ -62,12 +65,15 @@ function MyController($scope, $http) {
 
     this.update = function (ticket) {
         console.log('appel update en cours...');
-        return $http.put(`${url}/${ticket._id}`, {
-            _id: ticket._id,
-            name: ticket.newName
-        }).then((response) => {
-            console.log('ticket', response.data.content);
-            this.ticket = response.data.content;
+        return oneTicketApi.updateTicket(ticket._id, {
+            ticket: {
+                id: ticket._id,
+                name: ticket.newName
+            }
+        }).then(response => {
+            console.log('response', response);
+            this.ticket = response.content;
+            $scope.$apply();
             this.query();
         }).catch((error) => {
             console.error('error', error);
