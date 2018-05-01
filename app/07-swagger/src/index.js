@@ -82,9 +82,9 @@ function MyController($scope, $http) {
 
     this.delete = function (ticket) {
         console.log('appel delete en cours...');
-        return $http.delete(`${url}/${ticket._id}`).then((response) => {
-            console.log('ticket', response.data.content);
-            this.ticket = response.data.content;
+        return oneTicketApi.deleteTicket(ticket._id).then(response => {
+            console.log('response', response);
+            this.ticket = response.content;
             this.query();
         }).catch((error) => {
             console.error('error', error);
