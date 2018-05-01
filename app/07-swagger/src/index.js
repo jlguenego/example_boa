@@ -22,7 +22,7 @@ function MyController($http) {
 
 	this.create = function () {
         console.log('appel create en cours...', OneTicketApi);
-        return oneTicketApi.createTicketWithHttpInfo({
+        return oneTicketApi.createTicket({
             ticket: this.newTicket
         }).then(() => {
 			this.query();
