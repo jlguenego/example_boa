@@ -65,12 +65,19 @@ exports.deleteTicket = function (id) {
  **/
 exports.retrieveTicket = function (id) {
   return new Promise(async function (resolve, reject) {
-    var examples = {};
-    examples['application/json'] = "{}";
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+    try {
+      const myId = getId(id);
+      const resource = await Ticket.findById(myId);
+      if (resource === null) {
+        throw {
+          status: 404,
+          message: 'not found',
+        }
+      }
+      resolve(JSON.stringify({ content: resource.toObject() }));
+    } catch (e) {
+      console.log('error', e);
+      reject(JSON.stringify(e));
     }
   });
 }
