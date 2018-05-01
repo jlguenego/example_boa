@@ -9,15 +9,15 @@ info:
   license:
     name: "ISC"
     url: "https://opensource.org/licenses/ISC"
-host: "virtserver.swaggerhub.com"
-basePath: "/example-boa/ticket/1.0.0"
+host: "localhost:8080"
+basePath: "/ws"
 tags:
 - name: "all-tickets"
   description: "Operations on all tickets"
 - name: "one-ticket"
   description: "Operations on one ticket"
 schemes:
-- "https"
+- "http"
 paths:
   /tickets:
     get:
