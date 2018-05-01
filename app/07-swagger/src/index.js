@@ -2,9 +2,14 @@ import 'angular/angular-csp.css';
 import './style.css';
 import 'angular';
 
+import { OneTicketApi, ApiClient } from '../javascript-client-generated/src/index';
+
 const app = angular.module('myApp', []);
 
 const url = '../../../ws/tickets';
+ApiClient.instance.basePath = '../../../ws';
+
+const oneTicketApi = new OneTicketApi();
 
 function MyController($http) {
 
@@ -16,8 +21,10 @@ function MyController($http) {
 	};
 
 	this.create = function () {
-		console.log('appel create en cours...');
-		return $http.post(url, this.newTicket).then(() => {
+        console.log('appel create en cours...', OneTicketApi);
+        return oneTicketApi.createTicketWithHttpInfo({
+            ticket: this.newTicket
+        }).then(() => {
 			this.query();
 		}).catch((error) => {
 			console.error('error', error);
