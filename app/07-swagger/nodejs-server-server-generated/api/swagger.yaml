@@ -200,6 +200,7 @@ definitions:
         example: "Widget Adapter"
     example:
       name: "Widget Adapter"
+      id: "5ae86ba4b698b82facf1a769"
   Response:
     type: "object"
     properties:

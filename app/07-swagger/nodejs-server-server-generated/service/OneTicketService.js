@@ -93,12 +93,23 @@ exports.retrieveTicket = function (id) {
  **/
 exports.updateTicket = function (id, ticket) {
   return new Promise(async function (resolve, reject) {
-    var examples = {};
-    examples['application/json'] = "{}";
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+    try {
+      const myId = getId(id);
+      let resource = await Ticket.findById(id);
+      if (resource === null) {
+        throw {
+          status: 404,
+          message: 'not found',
+        }
+      }
+      await resource.update(ticket, {
+        overwrite: true
+      });
+      resource = await Ticket.findById(id);
+      resolve(JSON.stringify({ content: resource.toObject() }));
+    } catch (e) {
+      console.log('error', e);
+      reject(JSON.stringify(e));
     }
   });
 }
