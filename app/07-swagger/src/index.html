@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>REST Example</title>
+</head>
+
+<body ng-cloak ng-csp ng-app="myApp" ng-controller="MyController as $ctrl">
+	<h1>REST Example with AngularJS client</h1>
+	<p>Note: install webpack globally and run it to see the compiled file.
+		<br/><br/>
+		<label>New Ticket name: <input type="text" placeholeder="Ex: John" ng-model="$ctrl.newTicket.name" /></label>
+		<button jlg-click-and-disable="$ctrl.create()">Create</button>
+		<br/><br/>
+	</p>
+	<fieldset>
+
+		<button jlg-click-and-disable="$ctrl.query()">Rafraichir la liste des tickets</button>&nbsp;<button jlg-click-and-disable="$ctrl.empty()">Delete All</button><br/>
+
+		<table>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>New name</th>
+				<th>Update</th>
+				<th>Delete</th>
+			</tr>
+			<tr ng-repeat="ticket in $ctrl.tickets track by $index">
+				<td>{{ticket._id}}</td>
+				<td>{{ticket.name}}</td>
+				<td><input type="text" ng-model="ticket.newName" /></td>
+				<td><button jlg-click-and-disable="$ctrl.update(ticket)">Update</button></td>
+				<td><button jlg-click-and-disable="$ctrl.delete(ticket)">Delete</button></td>
+			</tr>
+		</table>
+	</fieldset>
+
+	<fieldset ng-init="id = 2">
+		<input type="text" ng-model="id" /><br/>
+		<button jlg-click-and-disable="$ctrl.retrieve(id)">Retrieve the ticket</button><br/>
+		<br/>
+		<div ng-cloak>Retrieve Ticket: {{$ctrl.retrievedTicket}}</div>
+	</fieldset>
+</body>
+
+</html>

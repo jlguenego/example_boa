@@ -1,0 +1,212 @@
+---
+swagger: "2.0"
+info:
+  description: "Ticket API for illustrating purpose."
+  version: "1.0.0"
+  title: "Ticket API"
+  contact:
+    email: "jlguenego@gmail.com"
+  license:
+    name: "ISC"
+    url: "https://opensource.org/licenses/ISC"
+host: "virtserver.swaggerhub.com"
+basePath: "/example-boa/ticket/1.0.0"
+tags:
+- name: "all-tickets"
+  description: "Operations on all tickets"
+- name: "one-ticket"
+  description: "Operations on one ticket"
+schemes:
+- "https"
+paths:
+  /tickets:
+    get:
+      tags:
+      - "all-tickets"
+      summary: "List all tickets"
+      description: "To be able\nto retrieve all tickets.\n"
+      operationId: "retrieveAllTickets"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters: []
+      responses:
+        200:
+          description: "An object with content pointing on the\nlist of all the tickets.\n"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "AllTickets"
+    post:
+      tags:
+      - "one-ticket"
+      summary: "Create an new ticket"
+      description: "Create an new ticket\non multinline...\n"
+      operationId: "createTicket"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "ticket"
+        description: "a ticket"
+        required: false
+        schema:
+          $ref: "#/definitions/Ticket"
+      responses:
+        201:
+          description: "item created"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "invalid input, object invalid"
+        406:
+          description: "format not accepted (only JSON and XML)"
+        409:
+          description: "conflict: an existing item already exists"
+      x-swagger-router-controller: "OneTicket"
+    delete:
+      tags:
+      - "all-tickets"
+      summary: "Delete all tickets"
+      description: "To be able\nto delete all tickets.\n"
+      operationId: "deleteAllTickets"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters: []
+      responses:
+        204:
+          description: "No content returned.\n"
+        500:
+          description: "server internal error"
+      x-swagger-router-controller: "AllTickets"
+  /tickets/{id}:
+    get:
+      tags:
+      - "one-ticket"
+      summary: "Retrieve a single ticket"
+      description: "Retrieve a ticket"
+      operationId: "retrieveTicket"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ticket id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "item retrieved."
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "invalid input, object invalid."
+        404:
+          description: "ticket not found."
+        406:
+          description: "format not accepted (only JSON and XML)."
+      x-swagger-router-controller: "OneTicket"
+    put:
+      tags:
+      - "one-ticket"
+      summary: "Update an new ticket"
+      description: "Update a ticket"
+      operationId: "updateTicket"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ticket id"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ticket"
+        description: "a ticket"
+        required: false
+        schema:
+          $ref: "#/definitions/Ticket"
+      responses:
+        200:
+          description: "item updated."
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "invalid input, object invalid."
+        404:
+          description: "ticket not found."
+        406:
+          description: "format not accepted (only JSON and XML)."
+      x-swagger-router-controller: "OneTicket"
+    delete:
+      tags:
+      - "one-ticket"
+      summary: "Delete an existing ticket."
+      description: "Delete an existing ticket."
+      operationId: "deleteTicket"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ticket id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "item deleted."
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "invalid input, object invalid."
+        404:
+          description: "ticket not found."
+        406:
+          description: "format not accepted (only JSON and XML)."
+      x-swagger-router-controller: "OneTicket"
+definitions:
+  Ticket:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Widget Adapter"
+    example:
+      name: "Widget Adapter"
+      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  Response:
+    type: "object"
+    properties:
+      content:
+        type: "object"
+        properties: {}
+      error:
+        type: "object"
+        properties: {}
