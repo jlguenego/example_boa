@@ -1,37 +1,38 @@
----
-swagger: "2.0"
+swagger: '2.0'
 info:
   description: Ticket API for illustrating purpose.
   version: 1.0.0
   title: Ticket API
+  # put the contact info for your development or API team
   contact:
     email: jlguenego@gmail.com
+
   license:
     name: ISC
     url: https://opensource.org/licenses/ISC
-host: virtserver.swaggerhub.com
-basePath: /example-boa/ticket/1.0.0
+
+# tags are used for organizing operations
 tags:
 - name: all-tickets
   description: Operations on all tickets
 - name: one-ticket
   description: Operations on one ticket
-schemes:
-- https
+
 paths:
   /tickets:
     get:
       tags:
       - all-tickets
       summary: List all tickets
+      operationId: retrieveAllTickets
       description: |
         To be able
         to retrieve all tickets.
-      operationId: retrieveAllTickets
       produces:
       - application/json
       - application/xml
       parameters: []
+      # no paramters.
       responses:
         200:
           description: |
@@ -39,17 +40,18 @@ paths:
             list of all the tickets.
           schema:
             type: object
-            properties: {}
+            items:
+              $ref: '#/definitions/Response'
         400:
           description: bad input parameter
     post:
       tags:
       - one-ticket
       summary: Create an new ticket
+      operationId: createTicket
       description: |
         Create an new ticket
         on multinline...
-      operationId: createTicket
       consumes:
       - application/json
       - application/xml
@@ -60,7 +62,6 @@ paths:
       - in: body
         name: ticket
         description: a ticket
-        required: false
         schema:
           $ref: '#/definitions/Ticket'
       responses:
@@ -68,25 +69,27 @@ paths:
           description: item created
           schema:
             type: object
-            properties: {}
+            items:
+              $ref: '#/definitions/Response'
         400:
           description: invalid input, object invalid
         406:
           description: format not accepted (only JSON and XML)
         409:
-          description: 'conflict: an existing item already exists'
+          description: "conflict: an existing item already exists"
     delete:
       tags:
       - all-tickets
       summary: Delete all tickets
+      operationId: deleteAllTickets
       description: |
         To be able
         to delete all tickets.
-      operationId: deleteAllTickets
       produces:
       - application/json
       - application/xml
       parameters: []
+      # no paramters.
       responses:
         204:
           description: |
@@ -98,8 +101,8 @@ paths:
       tags:
       - one-ticket
       summary: Retrieve a single ticket
-      description: Retrieve a ticket
       operationId: retrieveTicket
+      description: Retrieve a ticket
       consumes:
       - application/json
       - application/xml
@@ -117,7 +120,8 @@ paths:
           description: item retrieved.
           schema:
             type: object
-            properties: {}
+            items:
+              $ref: '#/definitions/Response'
         400:
           description: invalid input, object invalid.
         404:
@@ -128,8 +132,8 @@ paths:
       tags:
       - one-ticket
       summary: Update an new ticket
-      description: Update a ticket
       operationId: updateTicket
+      description: Update a ticket
       consumes:
       - application/json
       - application/xml
@@ -142,10 +146,9 @@ paths:
         description: ticket id
         required: true
         type: string
-      - in: body
-        name: ticket
+      - name: ticket
+        in: body
         description: a ticket
-        required: false
         schema:
           $ref: '#/definitions/Ticket'
       responses:
@@ -153,7 +156,8 @@ paths:
           description: item updated.
           schema:
             type: object
-            properties: {}
+            items:
+              $ref: '#/definitions/Response'
         400:
           description: invalid input, object invalid.
         404:
@@ -164,8 +168,8 @@ paths:
       tags:
       - one-ticket
       summary: Delete an existing ticket.
-      description: Delete an existing ticket.
       operationId: deleteTicket
+      description: Delete an existing ticket.
       consumes:
       - application/json
       - application/xml
@@ -183,7 +187,8 @@ paths:
           description: item deleted.
           schema:
             type: object
-            properties: {}
+            items:
+              $ref: '#/definitions/Response'
         400:
           description: invalid input, object invalid.
         404:
@@ -201,15 +206,16 @@ definitions:
       name:
         type: string
         example: Widget Adapter
-    example:
-      name: Widget Adapter
-      id: d290f1ee-6c54-4b01-90e6-d701748f0851
   Response:
     type: object
     properties:
       content:
         type: object
-        properties: {}
       error:
         type: object
-        properties: {}
+        
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /example-boa/ticket/1.0.0
+schemes:
+ - https
