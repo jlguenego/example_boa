@@ -1,5 +1,18 @@
 'use strict';
 
+const mongoose = require('mongoose');
+const Ticket = require('./ticket');
+
+function getId(id) {
+  try {
+    return mongoose.Types.ObjectId(id);
+  } catch (e) {
+    throw {
+      status: 400,
+      message: 'Id not well formatted',
+    }
+  }
+}
 
 /**
  * Create an new ticket
@@ -8,14 +21,16 @@
  * ticket Ticket a ticket (optional)
  * returns Object
  **/
-exports.createTicket = function(ticket) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = "{}";
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.createTicket = function (ticket) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      console.log('createTicket');
+      const m = new Ticket(ticket);
+      await m.save();
+      resolve(JSON.stringify({ content: m.toObject() }));
+    } catch (e) {
+      console.log('error', e);
+      reject(JSON.stringify(e));
     }
   });
 }
@@ -28,8 +43,8 @@ exports.createTicket = function(ticket) {
  * id String ticket id
  * returns Object
  **/
-exports.deleteTicket = function(id) {
-  return new Promise(function(resolve, reject) {
+exports.deleteTicket = function (id) {
+  return new Promise(async function (resolve, reject) {
     var examples = {};
     examples['application/json'] = "{}";
     if (Object.keys(examples).length > 0) {
@@ -48,8 +63,8 @@ exports.deleteTicket = function(id) {
  * id String ticket id
  * returns Object
  **/
-exports.retrieveTicket = function(id) {
-  return new Promise(function(resolve, reject) {
+exports.retrieveTicket = function (id) {
+  return new Promise(async function (resolve, reject) {
     var examples = {};
     examples['application/json'] = "{}";
     if (Object.keys(examples).length > 0) {
@@ -69,8 +84,8 @@ exports.retrieveTicket = function(id) {
  * ticket Ticket a ticket (optional)
  * returns Object
  **/
-exports.updateTicket = function(id,ticket) {
-  return new Promise(function(resolve, reject) {
+exports.updateTicket = function (id, ticket) {
+  return new Promise(async function (resolve, reject) {
     var examples = {};
     examples['application/json'] = "{}";
     if (Object.keys(examples).length > 0) {

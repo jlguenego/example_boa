@@ -29,7 +29,8 @@ exports.deleteAllTickets = function () {
       await Ticket.deleteMany({});
       resolve();
     } catch (e) {
-      reject(e);
+      console.log('error', e);
+      reject(JSON.stringify(e));
     }
     
   });

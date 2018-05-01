@@ -194,13 +194,12 @@ definitions:
       id:
         type: "string"
         format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        example: "5ae86ba4b698b82facf1a769"
       name:
         type: "string"
         example: "Widget Adapter"
     example:
       name: "Widget Adapter"
-      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
   Response:
     type: "object"
     properties:
