@@ -43,13 +43,16 @@ exports.deleteAllTickets = function () {
  * returns Object
  **/
 exports.retrieveAllTickets = function () {
-  return new Promise(function (resolve, reject) {
-    var examples = {};
-    examples['application/json'] = "{}";
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+  return new Promise(async function (resolve, reject) {
+    try {
+      console.log('retrieve all tickets');
+      const resources = await Ticket.find({});
+      const array = resources.map(r => r.toObject());
+      console.log('resources', array);
+      resolve(JSON.stringify({content: array}));
+    } catch (e) {
+      console.log('error', e);
+      reject(JSON.stringify(e));
     }
   });
 }
