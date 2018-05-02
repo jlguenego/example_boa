@@ -14,5 +14,5 @@ function register() {
 }
 
 register();
-console.log('script loaded');
+console.log('script loaded.');
 
