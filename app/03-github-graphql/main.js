@@ -35,7 +35,7 @@ const req = https.request(options, function (res) {
     res.on('end', () => {
         try {
             const body = JSON.parse(rawData);
-            console.log('Here is the list of all the repos I have starred:');
+            console.log('My name is :');
             console.log('body', body.data.viewer.name);
             console.log('exit');
         } catch (e) {
