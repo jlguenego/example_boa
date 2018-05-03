@@ -34,6 +34,7 @@
     "github-api": "^3.0.0",
     "graphql": "^0.13.2",
     "html-webpack-plugin": "^3.2.0",
+    "http-auth": "^3.2.3",
     "jsontoxml": "^1.0.0",
     "mongoose": "^5.0.16",
     "sequelize": "^4.37.6",

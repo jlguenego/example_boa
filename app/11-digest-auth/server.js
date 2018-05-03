@@ -1,15 +1,14 @@
 const express = require('express'); // charge ExpressJS
 const serveIndex = require('serve-index');
-const basicAuth = require('express-basic-auth')
+const auth = require('http-auth');
+const path = require('path');
 
 const app = express();
 
-
-app.use('/secret.html', basicAuth({
-	users: { 'jlouis': 'suzana' },
-	challenge: true,
-	realm: 'My secret room',
-}));
+app.use('/secret.html', auth.connect(auth.digest({
+	realm: 'mysecretarea',
+	file: path.resolve(__dirname, './.users'),
+})));
 
 app.use(express.static('.'));
 app.use(serveIndex('.', { icons: true }));
