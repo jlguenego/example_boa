@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMAC client</title>
+</head>
+
+<body>
+    <h1>HMAC (SHA256)</h1>
+    <button onclick="hmac()">Compute HMAC</button>
+    <div id="content"></div>
+    
+    <script src="../../node_modules/crypto-js/crypto-js.js"></script>
+    <script>
+        async function hmac() {
+            const response = await fetch('./test.txt');
+            const message = await response.text();
+            const hmac = CryptoJS.HmacSHA256(message, 'jlg-secret');
+            document.querySelector('#content').innerHTML = hmac;
+        }
+        
+    </script>
+</body>
+
+</html>
