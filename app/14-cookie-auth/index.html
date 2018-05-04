@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bearer Authentication</title>
+</head>
+
+<body>
+    <h1>Bearer Authentication</h1>
+    <button onclick="ajax()">Look at my secret</button>
+    <div id="content"></div>
+    <h2>Notes</h2>
+    <p>Because you are nice, I give you the login/password:</p>
+    <ol>
+        <li>Login: jlouis</li>
+        <li>Password: suzana</li>
+    </ol>
+    <script>
+
+        async function ajax() {
+            document.querySelector('#content').innerHTML = '';
+            const myRequest = new Request('./secret.json');
+            const token = prompt('what is the token ?');
+            myRequest.headers.append('Authorization', `Bearer ${token}`);
+            const response = await fetch(myRequest);
+            console.log('response', response);
+            if (response.status >= 400) {
+                alert('sorry you are not allowed to see my secret');
+                return;
+            }
+            const json = await response.json();
+            console.log('json', json);
+            document.querySelector('#content').innerHTML = json.content;
+        }
+
+    </script>
+</body>
+
+</html>
