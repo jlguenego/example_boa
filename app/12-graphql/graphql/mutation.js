@@ -1,4 +1,4 @@
-const { GraphQLObjectType, GraphQLString } = require('graphql');
+const { GraphQLObjectType, GraphQLString, GraphQLBoolean } = require('graphql');
 const ticket = require('./type/ticket');
 const database = require('../database');
 
@@ -46,6 +46,13 @@ module.exports = new GraphQLObjectType({
             resolve: async (root, { id, name }) => {
                 const ticket = await database.deleteTicket(id);
                 return ticket;
+            },
+        },
+        deleteAllTickets: {
+            type: GraphQLBoolean,
+            resolve: async (root) => {
+                await database.deleteAllTickets();
+                return true;
             },
         },
     },
