@@ -15,7 +15,15 @@ function MyController($http) {
 
 	this.create = function () {
 		console.log('appel create en cours...');
-		return $http.post(url, this.newTicket).then(() => {
+		const graphql = {
+			query: `mutation createTicket
+{
+	createTicket(name: "${this.newTicket.name}") {
+		id
+	}
+}`
+		};
+		return $http.post(url, graphql).then(() => {
 			this.query();
 		}).catch((error) => {
 			console.error('error', error);
@@ -24,7 +32,13 @@ function MyController($http) {
 
 	this.empty = function () {
 		console.log('appel delete all en cours...');
-		return $http.delete(url).then(() => {
+		const graphql = {
+			query: `mutation deleteAllTickets
+{
+	deleteAllTickets
+}`
+		};
+		return $http.post(url, graphql).then(() => {
 			this.query();
 		}).catch((error) => {
 			console.error('error', error);
@@ -33,9 +47,18 @@ function MyController($http) {
 
 	this.retrieve = function (id) {
 		console.log('appel retrieve en cours...', id);
-		return $http.get(`${url}/${id}`).then((response) => {
-			console.log('ticket', response.data.content);
-			this.retrievedTicket = response.data.content;
+		const graphql = {
+			query: `
+query retrieveTicket {
+	ticket(id: "${id}") {
+		id
+		name
+	} 
+}`
+		};
+		return $http.post(url, graphql).then((response) => {
+			console.log('ticket', response.data);
+			this.retrievedTicket = response.data.data.ticket;
 		}).catch((error) => {
 			console.error('error', error);
 		});
@@ -43,12 +66,18 @@ function MyController($http) {
 
 	this.update = function (ticket) {
 		console.log('appel update en cours...');
-		return $http.put(`${url}/${ticket._id}`, {
-			_id: ticket._id,
-			name: ticket.newName
-		}).then((response) => {
+		const graphql = {
+			query: `
+mutation updateTicket {
+	updateTicket(id: "${ticket.id}", name: "${ticket.newName}") {
+		id
+		name
+	} 
+}`
+		};
+		return $http.post(url, graphql).then((response) => {
 			console.log('ticket', response.data.content);
-			this.ticket = response.data.content;
+			this.ticket = response.data.data.ticket;
 			this.query();
 		}).catch((error) => {
 			console.error('error', error);
@@ -57,9 +86,18 @@ function MyController($http) {
 
 	this.delete = function (ticket) {
 		console.log('appel delete en cours...');
-		return $http.delete(`${url}/${ticket._id}`).then((response) => {
+		const graphql = {
+			query: `
+mutation deleteTicket {
+	deleteTicket(id: "${ticket.id}") {
+		id
+		name
+	} 
+}`
+		};
+		return $http.post(url, graphql).then((response) => {
 			console.log('ticket', response.data.content);
-			this.ticket = response.data.content;
+			this.ticket = response.data.data.ticket;
 			this.query();
 		}).catch((error) => {
 			console.error('error', error);
