@@ -1,12 +1,16 @@
 const app = angular.module('myApp', []);
 
-const url = '../../ws/tickets';
+const url = '../../ws/graphql';
 
 function MyController($http) {
 
 	this.query = function () {
 		console.log('appel query en cours...');
-		return $http.get(url).then(response => this.tickets = response.data.content).catch(e => console.log('error', e));
+
+		const graphql = {
+			query: '{ tickets { id name }}'
+		};
+		return $http.post(url, graphql).then(response => this.tickets = response.data.data.tickets).catch(e => console.log('error', e));
 	};
 
 	this.create = function () {

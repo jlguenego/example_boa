@@ -35,7 +35,7 @@
 				<th>Delete</th>
 			</tr>
 			<tr ng-repeat="ticket in $ctrl.tickets track by $index">
-				<td>{{ticket._id}}</td>
+				<td>{{ticket.id}}</td>
 				<td>{{ticket.name}}</td>
 				<td>
 					<input type="text" ng-model="ticket.newName" />
