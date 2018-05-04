@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bearer Authentication</title>
+    <title>Cookie Authentication</title>
 </head>
 
 <body>
-    <h1>Bearer Authentication</h1>
+    <h1>Cookie Authentication</h1>
     <button onclick="ajax()">Look at my secret</button>
     <div id="content"></div>
+    <p>Tips: if you want to see the secret, you need to get a cookie first.</p>
+    <button onclick="getCookie()">Get Cookie</button>
     <h2>Notes</h2>
     <p>Because you are nice, I give you the login/password:</p>
     <ol>
@@ -22,9 +24,10 @@
         async function ajax() {
             document.querySelector('#content').innerHTML = '';
             const myRequest = new Request('./secret.json');
-            const token = prompt('what is the token ?');
-            myRequest.headers.append('Authorization', `Bearer ${token}`);
-            const response = await fetch(myRequest);
+            console.log('myRequest.headers', myRequest.headers.forEach(v => console.log('v', v)));
+            const response = await fetch(myRequest, {
+                credentials: "same-origin"
+            });
             console.log('response', response);
             if (response.status >= 400) {
                 alert('sorry you are not allowed to see my secret');
@@ -33,6 +36,21 @@
             const json = await response.json();
             console.log('json', json);
             document.querySelector('#content').innerHTML = json.content;
+        }
+
+        async function getCookie() {
+            try {
+                const password = prompt('Give me the password (tips: it is "suzana"): ');
+                const myRequest = new Request('./connect');
+                myRequest.headers.append('X-JLGSecret', password);
+                const response = await fetch(myRequest);
+                // the cookie cannot be processed from an ajax request.
+                document.cookie = `jlouis=${password}`;
+            } catch (e) {
+                console.log('error', e);
+                alert('The get cookie cannot be done.')
+            }
+
         }
 
     </script>

@@ -27,6 +27,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
     "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
     "express-basic-auth": "^1.1.5",
