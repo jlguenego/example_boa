@@ -9,7 +9,7 @@ module.exports = new GraphQLObjectType({
             type: new GraphQLList(ticket),
             resolve: async (root) => {
                 console.log('root', root);
-                return database.retrieveAllTicket();
+                return database.retrieveAllTickets();
             },
         },
         ticket: {

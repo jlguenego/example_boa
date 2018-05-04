@@ -33,14 +33,14 @@ async function createTicket(body) {
     }
 }
 
-async function retrieveAllTicket() {
+async function retrieveAllTickets() {
     try {
         const resources = await Ticket.find({});
         const result = resources.map(r => manageId(r));
         return result;
     } catch (e) {
         console.log('error', e);
-        throw new Error('cannot create the ticket', e.message);
+        throw new Error('cannot retrieve all the tickets', e.message);
     }
 }
 
@@ -54,15 +54,60 @@ async function retrieveTicket(id) {
         return manageId(result);
     } catch (e) {
         console.log('error', e);
-        throw new Error('cannot create the ticket', e.message);
+        throw new Error('cannot retrieve the ticket', e.message);
+    }
+}
+
+async function updateTicket(id, body) {
+    try {
+        let m = await Ticket.findById(id);
+        if (m === null) {
+            throw new Error('object not found');
+        }
+        await m.update(body, {
+            overwrite: true
+        });
+        m = await Ticket.findById(id);
+        return manageId(m.toObject());
+    } catch (e) {
+        console.log('error', e);
+        throw new Error('cannot update the ticket', e.message);
+    }
+}
+
+async function deleteTicket(id) {
+    try {
+        let m = await Ticket.findById(id);
+        if (m === null) {
+            throw new Error('object not found');
+        }
+        await Ticket.deleteOne({ _id: id });
+        return manageId(m.toObject());
+    } catch (e) {
+        console.log('error', e);
+        throw new Error('cannot delete the ticket', e.message);
+    }
+}
+
+async function deleteAllTickets() {
+    try {
+        await Ticket.deleteMany({});
+    } catch (e) {
+        console.log('error', e);
+        throw new Error('cannot delete the ticket', e.message);
     }
 }
 
 
+
+
 const database = {
     createTicket,
-    retrieveAllTicket,
+    retrieveAllTickets,
     retrieveTicket,
+    updateTicket,
+    deleteTicket,
+    deleteAllTickets,
 };
 
 module.exports = database;
