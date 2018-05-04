@@ -26,9 +26,7 @@ async function createTicket(body) {
         const m = new Ticket(body);
         await m.save();
         const result = m.toObject();
-        result.id = result._id;
-        delete result._id;
-        return result;
+        return manageId(result);
     } catch (e) {
         console.log('error', e);
         throw new Error('cannot create the ticket', e.message);
@@ -46,10 +44,25 @@ async function retrieveAllTicket() {
     }
 }
 
+async function retrieveTicket(id) {
+    try {
+        const m = await Ticket.findById(id);
+        if (m === null) {
+            throw new Error('object not found');
+        }
+        const result = m.toObject();
+        return manageId(result);
+    } catch (e) {
+        console.log('error', e);
+        throw new Error('cannot create the ticket', e.message);
+    }
+}
+
 
 const database = {
     createTicket,
-    retrieveAllTicket
+    retrieveAllTicket,
+    retrieveTicket,
 };
 
 module.exports = database;

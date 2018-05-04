@@ -23,7 +23,7 @@ module.exports = new GraphQLObjectType({
             resolve: async (root, { id }) => {
                 console.log('root', root);
                 console.log('id', id);
-                return { id: 45, name: 'fake' };
+                return database.retrieveTicket(id);
             },
         },
     }),
