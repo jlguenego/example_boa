@@ -35,5 +35,18 @@ module.exports = new GraphQLObjectType({
                 return ticket;
             },
         },
+        deleteTicket: {
+            type: ticket,
+            args: {
+                id: {
+                    description: 'id of the ticket',
+                    type: GraphQLString, 
+                },
+            },
+            resolve: async (root, { id, name }) => {
+                const ticket = await database.deleteTicket(id);
+                return ticket;
+            },
+        },
     },
 });
