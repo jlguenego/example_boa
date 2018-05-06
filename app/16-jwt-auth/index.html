@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT Authentication</title>
+</head>
+
+<body>
+    <h1>JWT Authentication</h1>
+    <button onclick="connect()">Connect (JWT)</button>
+    <button onclick="getSecret()">Get secret</button>
+    <div id="content"></div>
+
+    <script src="../../node_modules/jwt-decode/build/jwt-decode.js"></script>
+    <script>
+        let jwtToken;
+        async function connect() {
+            try {
+                const login = prompt('login');
+                const password = prompt('password');
+                const response = await fetch('/connect', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'text/plain',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user: login,
+                        password // clear password... needs SSL.
+                    })
+                });
+                jwtToken = await response.json();
+                const decoded = jwt_decode(jwtToken);
+                document.querySelector('#content').innerHTML = JSON.stringify(decoded);
+            } catch (e) {
+                console.error('error', e);
+            }
+
+
+        }
+
+        async function getSecret() {
+            try {
+                const request = new Request('/secret.json');
+                request.headers.set('Authorization', 'Bearer ' + jwtToken);
+                const response = await fetch(request);
+                document.querySelector('#content').innerHTML = await response.text();
+            } catch (e) {
+                console.error('error', e);
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>
