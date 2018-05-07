@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth Authentication</title>
+</head>
+
+<body>
+    <h1>OAuth Authentication</h1>
+    <h2>Grant type: authorization code</h2>
+    <button onclick="connect()">Connect with Github</button>
+
+    <script>
+
+        function serialize(obj) {
+            return '?' + Object.keys(obj).reduce(function (a, k) { a.push(k + '=' + encodeURIComponent(obj[k])); return a }, []).join('&')
+        }
+
+        async function connect() {
+            try {
+                const queryParam = {
+                    client_id: 'Iv1.05f1c54e8fe2d5b9',
+                    redirect_uri: 'http://localhost:8000/oauth/user-authorization-callback',
+                    scope: 'user',
+                    state: 'ok' + Math.floor(Math.random() * 100000),
+                    allow_signup: true,
+                };
+                window.location.href = 'https://github.com/login/oauth/authorize' + serialize(queryParam);
+            } catch (e) {
+                console.error('error', e);
+            }
+        }
+    </script>
+</body>
+
+</html>
