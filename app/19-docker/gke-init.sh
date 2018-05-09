@@ -5,7 +5,7 @@ GCR_HOSTNAME=eu.gcr.io
 PROJECT_ID="$(gcloud config get-value project -q)"
 ZONE="$(gcloud config get-value compute/zone -q)"
 
-test ${ZONE}
+test ${ZONE} || echo 'You must configure a zone with gcloud init'; exit 1;
 
 
 # Step 1: Build the container image
