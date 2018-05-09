@@ -1,4 +1,4 @@
-# Docker an simple express server with MongoDB.
+# Docker a simple express server on a local machine.
 
 # Installation
 
@@ -53,7 +53,44 @@ You should see the server logs.
 
 Open your navigator and check the url `http://localhost:49160`.
 
-## Acknewledgement
+# Docker on Google Kubernetes Engine (GKE)
+
+## Prerequisites
+
+Create a new project with Google Cloud Platform.
+
+Note: Needs to create an account with a credit card that will not be charged.
+
+## Google Cloud Shell
+
+Run a Google Cloud Shell and do:
+
+```
+$ gcloud init
+```
+Answer the question and specify a zone (europe, asia, etc.) of your choice.
+
+```
+$ git clone --depth 1 https://github.com/jlguenego/example_boa.git
+$ cd example_boa/app/19-docker
+$ bash gke-init.sh
+```
+
+The shell script `gke-init.sh` creates
+
+- the docker image,
+- the Google Container Registry necessary to store the docker image
+
+Now we offer 2 possibilities to do the kubernetes command:
+
+1) with the shell command: `bash gke-deploy.sh`
+2) with a YAML file: `bash gke-deploy-yml.sh`
+
+
+
+
+
+# Acknewledgement
 
 Node documentation.
 
