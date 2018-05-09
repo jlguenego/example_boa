@@ -10,7 +10,7 @@ kubectl run hello-deployment --image=${GCR_HOSTNAME}/${PROJECT_ID}/hello-app:v1 
 kubectl get pods
 
 # Step 6: Expose your application to the Internet
-kubectl expose deployment hello-deployment –-name=hello-service --type=LoadBalancer --port 80 --target-port 8000
+kubectl expose deployment hello-service –-name=hello-deployment --type=LoadBalancer --port 80 --target-port 8000
 
 # Step 7: Scale up your application
 kubectl scale deployment hello-deployment --replicas=3
