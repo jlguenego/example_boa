@@ -49,6 +49,17 @@ $ docker logs <container id>
 
 You should see the server logs.
 
+## Test
+
+Open your navigator and check the url `http://localhost:49160`.
+
+## Acknewledgement
+
+Node documentation.
+
+https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
+
+
 # Author
 
 Jean-Louis GUENEGO jlguenego@gmail.com
