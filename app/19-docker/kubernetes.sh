@@ -11,8 +11,8 @@ export PROJECT_ID="$(gcloud config get-value project -q)"
 docker build -t gcr.io/${PROJECT_ID}/hello-app:v1 .
 docker images
 
-# Step 2: Upload the container image to a google datacenter.
-gcloud docker -- push gcr.io/${PROJECT_ID}/hello-app:v1 --zone=europe-west4-a
+# Step 2: Upload the container image
+gcloud docker -- push gcr.io/${PROJECT_ID}/hello-app:v1
 
 # Step 4: Create a container cluster
 gcloud container clusters create hello-cluster --num-nodes=3 --zone=europe-west4-a
