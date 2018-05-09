@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hello-deployment
+  labels:
+    #Project ID
+    app: example-boa
+spec:
+  #Run two instances of our application
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: example-boa
+    spec:
+      #Container details
+      containers:
+        - name: hello-app
+          image: eu.gcr.io/example-boa/hello-app:v1
+          imagePullPolicy: Always
+          #Ports to expose
+          ports:
+          - containerPort: 8000
