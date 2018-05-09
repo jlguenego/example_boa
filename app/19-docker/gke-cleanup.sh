@@ -2,7 +2,8 @@
 set -eaux 
 
 
-kubectl delete service hello-web
+kubectl delete service hello-service
+kubectl delete deployment hello-deployment
 sleep 10
 gcloud compute forwarding-rules list
 
