@@ -35,3 +35,5 @@ kubectl get deployment hello-web
 
 kubectl get pods
 
+kubectl get service
+
