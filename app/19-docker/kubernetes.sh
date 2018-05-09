@@ -6,13 +6,16 @@ set -eaux
 
 # this script has to be used with "Google Cloud Shell".
 
+export GCR_HOSTNAME=eu.gcr.io
+
 # Step 1: Build the container image
 export PROJECT_ID="$(gcloud config get-value project -q)"
-docker build -t gcr.io/${PROJECT_ID}/hello-app:v1 .
+docker build -t ${GCR_HOSTNAME}/${PROJECT_ID}/hello-app:v1 .
 docker images
 
-# Step 2: Upload the container image
-gcloud docker -- push gcr.io/${PROJECT_ID}/hello-app:v1
+# Step 2: Upload the container image to the Google Content Registry.
+# https://console.cloud.google.com/gcr/
+gcloud docker -- push ${GCR_HOSTNAME}/${PROJECT_ID}/hello-app:v1
 
 # Step 4: Create a container cluster
 gcloud container clusters create hello-cluster --num-nodes=3 --zone=europe-west4-a
@@ -20,7 +23,7 @@ gcloud container clusters create hello-cluster --num-nodes=3 --zone=europe-west4
 gcloud compute instances list
 
 # Step 5: Deploy your application
-kubectl run hello-web --image=gcr.io/${PROJECT_ID}/hello-app:v1 --port 8000
+kubectl run hello-web --image=${GCR_HOSTNAME}/${PROJECT_ID}/hello-app:v1 --port 8000
 
 kubectl get pods
 
