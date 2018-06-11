@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build07": "cd app/07-swagger && webpack --mode development",
+    "start12": "node app/12-graphql/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
