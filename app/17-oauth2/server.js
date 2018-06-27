@@ -1,6 +1,7 @@
 const express = require('express');
 const serveIndex = require('serve-index');
 const rp = require('request-promise');
+const path = require('path');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -49,14 +50,14 @@ app.use('/oauth/user-authorization-callback', async (req, res, next) => {
 		const response = await rp(options2);
 		const user = JSON.parse(response);
 		console.log('user', user);
-		res.render('./user.ejs', { user });
+		res.render(path.resolve(__dirname, 'user.ejs'), { user });
 	} catch (e) {
 		console.log('error', e);
 	}
 });
 
-app.use(express.static('../../'));
-app.use(serveIndex('../../', { icons: true }));
+app.use(express.static('.'));
+app.use(serveIndex('.', { icons: true }));
 
 app.use(function (req, res, next) {
 	console.log('404: Page not Found', req.url);

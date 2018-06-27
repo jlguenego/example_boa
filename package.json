@@ -7,6 +7,8 @@
     "build07": "cd app/07-swagger && webpack --mode development",
     "start06": "node app/06-rest/server.js",
     "start12": "node app/12-graphql/server.js",
+    "start16": "node app/16-jwt-auth/server.js",
+    "start17": "node app/17-oauth2/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

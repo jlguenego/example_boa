@@ -34,8 +34,8 @@ app.use('/secret.json', (req, res, next) => {
 	}
 });
 
-app.use(express.static('../../'));
-app.use(serveIndex('../../', { icons: true }));
+app.use(express.static('.'));
+app.use(serveIndex('.', { icons: true }));
 
 app.use(function (req, res, next) {
 	console.log('404: Page not Found', req.url);
