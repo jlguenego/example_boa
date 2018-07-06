@@ -9,6 +9,11 @@ app.use((req, res, next) => {
 	next();
 });
 
+app.post('/add', (req, res, next) => {
+	console.log('adding two integers', req.body);
+	res.json({ result: +req.body.a + +req.body.b });
+});
+
 const Ticket = mongoose.model('Ticket',
 	new mongoose.Schema({
 		// number: { type: String, required: true, unique: true, index: true },
@@ -16,16 +21,16 @@ const Ticket = mongoose.model('Ticket',
 		// movie: String
 		name: String
 	}, {
-		strict: false, // allow other field to be saved in MongoDB.
-	}));
+			strict: false, // allow other field to be saved in MongoDB.
+		}));
 
 const User = mongoose.model('User',
 	new mongoose.Schema({
 		lastname: { type: String, required: true },
 		firstname: { type: String, required: true },
 	}, {
-		strict: false, // allow other field to be saved in MongoDB.
-	}));
+			strict: false, // allow other field to be saved in MongoDB.
+		}));
 
 async function connect() {
 	try {

@@ -4,6 +4,7 @@ const ws = require('./ws.js');
 
 const app = express();
 
+app.use(express.json());
 app.use('/ws', ws);
 
 app.use(express.static('.'));
